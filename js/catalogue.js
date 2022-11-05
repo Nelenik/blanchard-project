@@ -24,7 +24,7 @@ let painters = {
     { name: "Перуцци, Бальдассаре" },
     { name: "Пизанелло" },
     { name: "Пинтуриккьо" },
-    ],
+  ],
   1500: [],
   1600: [],
   1700: [],
@@ -135,16 +135,27 @@ function createArtistList() {
           tagName: 'a',
           classes: ['artists__link'],
           // attributes: { 'href': `#${key}-${i}` },
-          attributes: {'tabindex': '0',  'href': '#!'},
+          attributes: { 'tabindex': '0', 'href': '#!' },
           text: value[i].name,
         })
 
+        if(link.textContent.toLowerCase().includes('гирландайо')) link.classList.add('artists__link--selected')
+
+        li.append(link);
+        ul.append(li);
+        target.append(ul);
+
         link.addEventListener('click', function (e) {
           // e.preventDefault();
+          let links = document.querySelectorAll('.artists__link');
+          links.forEach(el=>{el.classList.remove('artists__link--selected')});
+          this.classList.add('artists__link--selected');
+
           let infoBlock = document.querySelector('.painter');
           infoBlock.setAttribute('id', `${key}-${i}`);
 
-          if(window.matchMedia('(max-width: 576px)').matches) {
+
+          if (window.matchMedia('(max-width: 576px)').matches) {
             infoBlock.scrollIntoView({
               block: 'start',
               behavior: 'smooth',
@@ -154,9 +165,7 @@ function createArtistList() {
           createArtistInfo(infoBlock, value[i]);
         })
 
-        li.append(link);
-        ul.append(li);
-        target.append(ul);
+
       }
       let sample = target.querySelector('.catalogue-sample');
       if (sample.nextElementSibling == ul) sample.remove();

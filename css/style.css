@@ -49,14 +49,6 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
-p,
-h1,
-h2,
-h3,
-h4 {
-  margin: 0;
-}
-
 img {
   -o-object-fit: cover;
   object-fit: cover;
@@ -102,12 +94,14 @@ img {
 }
 
 .section-title {
+  margin: 0;
   font-size: 1.75rem;
   font-weight: 400;
   line-height: 2.375rem;
 }
 
 .text {
+  margin: 0;
   font-size: 1rem;
   line-height: 2rem;
 }
@@ -150,6 +144,7 @@ img {
   max-height: 22px;
   outline: 2px solid transparent;
   outline-offset: 3px;
+  transition: outline 0.5s ease;
 }
 
 .logo-img {
@@ -168,6 +163,7 @@ img {
   height: 18px;
   outline: 2px solid transparent;
   outline-offset: 3px;
+  transition: outline 0.5s ease;
 }
 
 .open-search svg {
@@ -177,27 +173,24 @@ img {
 
 .open-search rect,
 .open-search path {
-  transition: fill 0.3s ease;
+  transition: fill 0.5s ease;
 }
 
 .open-search:focus-visible {
   outline: 2px solid var(--effects-color-light);
-  transition: outline 0.3s ease;
 }
 
 @media (hover:hover) {
 
   .open-search:hover:not(:focus-visible):not(:active) rect,
   .open-search:hover:not(:focus-visible):not(:active) path {
-    fill: var(--effects-color-x-light);
-    transition: fill 0.3s ease;
+    fill: var(--effects-color-light);
   }
 }
 
 .open-search:active rect,
 .open-search:active path {
   fill: var(--effects-color-medium);
-  transition: fill 0.3s ease;
 }
 
 .burger {
@@ -207,6 +200,7 @@ img {
   height: 18px;
   outline: 2px solid transparent;
   outline-offset: 3px;
+  transition: outline 0.3s ease;
 }
 
 .burger::before,
@@ -216,7 +210,7 @@ img {
   left: 0;
   height: 2px;
   background-color: var(--light-color);
-  transition: background-color 0.3s ease;
+  transition: background-color 0.5s ease;
 }
 
 .burger::before {
@@ -260,12 +254,11 @@ img {
 .burger--active::after,
 .burger::before,
 .burger::after {
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 
 .burger:focus-visible {
   outline: 2px solid var(--effects-color-light);
-  transition: outline 0.3s ease;
 }
 
 @media (hover:hover) {
@@ -273,8 +266,7 @@ img {
   .burger:hover:not(:focus-visible):not(:active) .burger__line,
   .burger:hover:not(:focus-visible):not(:active)::after,
   .burger:hover:not(:focus-visible):not(:active)::before {
-    background-color: var(--effects-color-x-light);
-    transition: background-color 0.3s ease;
+    background-color: var(--effects-color-light);
   }
 }
 
@@ -282,15 +274,13 @@ img {
 .burger:active::after,
 .burger:active .burger__line {
   background-color: var(--effects-color-medium);
-  transition: background-color 0.3s ease;
 }
 
 .header__search {
   position: absolute;
   top: 0;
-  right: 0;
+  right: -100%;
   z-index: 20;
-  transform: scaleX(0);
   opacity: 0;
   visibility: hidden;
 }
@@ -309,14 +299,13 @@ img {
 
 .header__search--open {
   opacity: 1;
-  transform: scaleX(1);
+  right: 0;
   visibility: visible;
 }
 
 .header__search,
 .header__search--open {
-  transition: transform 0.3s ease, visibility 0.3s ease, opacity 0.3s ease;
-  transform-origin: right;
+  transition: right 0.5s ease, visibility 0.5s ease-in, opacity 0.3s ease;
 }
 
 .search__btn,
@@ -324,6 +313,9 @@ img {
   position: relative;
   width: 30px;
   height: 30px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: outline 0.5s ease;
 }
 
 .search__btn svg,
@@ -342,6 +334,12 @@ img {
 
 }
 
+.search__btn:focus-visible,
+.search__close:focus-visible {
+  outline: 2px solid var(--effects-color-dark);
+}
+
+
 .search__input {
   flex-grow: 1;
   border: none;
@@ -349,12 +347,12 @@ img {
   background: none;
   outline: none;
   color: var(--light-color);
+  transition: border-color 0.5s ease;
 }
 
 .search__input:focus-visible,
 .search__input:hover:not(:focus-visible) {
   border-color: var(--effects-color-light);
-  transition: border-color 0.3s ease;
 }
 
 input[type="search" i]::-webkit-search-cancel-button {
@@ -391,7 +389,7 @@ input[type="search" i]::-webkit-search-cancel-button {
 
 .menu,
 .menu--open {
-  transition: left 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  transition: left 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 
 .menu__list {
@@ -407,25 +405,25 @@ input[type="search" i]::-webkit-search-cancel-button {
   margin-left: -4px;
   position: relative;
   z-index: 10;
+  transition-property: color, backgrund-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
 
 .menu__link:focus-visible:not(:active) {
   outline: none;
   background-color: var(--effects-color-dark);
-  transition: background-color 0.3s ease;
 }
 
 @media (hover:hover) {
   .menu__link:hover:not(:focus-visible):not(:active) {
     color: var(--effects-color-light);
-    transition: color 0.3s ease;
   }
 }
 
 .menu__link:active {
   outline: none;
   color: var(--effects-color-dark);
-  transition: color 0.3s ease;
 }
 
 .header__entry-btn {
@@ -439,24 +437,24 @@ input[type="search" i]::-webkit-search-cancel-button {
   border-radius: 100px;
   outline: 2px solid transparent;
   outline-offset: 3px;
+  transition-property: outline, background-color, border-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
 
 .header__entry-btn:focus-visible {
   outline: 2px solid var(--effects-color-light);
-  transition: outline 0.3s ease;
 }
 
 @media (hover:hover) {
   .header__entry-btn:hover:not(:focus-visible):not(:active) {
     background-color: var(--effects-color-medium);
-    transition: background-color 0.3s ease;
   }
 }
 
 .header__entry-btn:active {
   background-color: var(--effects-color-dark);
   border-color: var(--effects-color-x-light);
-  transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .header__entry-btn svg {
@@ -482,32 +480,32 @@ input[type="search" i]::-webkit-search-cancel-button {
   height: 100%;
   opacity: 1;
   -webkit-animation-name: changeBg;
-          animation-name: changeBg;
+  animation-name: changeBg;
   -webkit-animation-duration: 11.7s;
-          animation-duration: 11.7s;
+  animation-duration: 11.7s;
   -webkit-animation-timing-function: ease-in;
-          animation-timing-function: ease-in;
+  animation-timing-function: ease-in;
   -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
   -webkit-animation-fill-mode: backwards;
-          animation-fill-mode: backwards;
+  animation-fill-mode: backwards;
 }
 
 .cover-1 {
   z-index: 2;
   -webkit-animation-delay: 0s;
-          animation-delay: 0s;
+  animation-delay: 0s;
 }
 
 .cover-2 {
   z-index: 1;
   -webkit-animation-delay: 4s;
-          animation-delay: 4s;
+  animation-delay: 4s;
 }
 
 .cover-3 {
   -webkit-animation-delay: 8s;
-          animation-delay: 8s;
+  animation-delay: 8s;
 }
 
 @-webkit-keyframes changeBg {
@@ -575,6 +573,7 @@ input[type="search" i]::-webkit-search-cancel-button {
 }
 
 .hero__title {
+  margin: 0;
   margin-bottom: 2px;
   font-weight: 700;
   font-size: 2rem;
@@ -582,6 +581,7 @@ input[type="search" i]::-webkit-search-cancel-button {
 }
 
 .hero__descr {
+  margin: 0;
   margin-bottom: 41px;
   font-weight: 400;
 }
@@ -597,24 +597,24 @@ input[type="search" i]::-webkit-search-cancel-button {
   border-radius: 100px;
   outline: 2px solid transparent;
   outline-offset: 3px;
+  transition-property: outline, border-color, background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
 
 .hero__btn:focus-visible:not(:active) {
   outline: 2px solid var(--effects-color-light);
-  transition: outline 0.1s linear;
 }
 
 @media(hover:hover) {
   .hero__btn:hover:not(:focus-visible):not(:active) {
     border-color: var(--effects-color-x-light);
-    transition: border-color 0.3s ease-in-out;
   }
 }
 
 .hero__btn:active {
   background-color: var(--effects-color-dark);
   border-color: var(--effects-color-x-light);
-  transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 /* ABOUT US */
@@ -628,6 +628,7 @@ input[type="search" i]::-webkit-search-cancel-button {
 }
 
 .about-us__descr {
+  margin: 0;
   font-size: 0.875rem;
   line-height: 1.75rem;
   width: min(100%, 1080px);
@@ -658,6 +659,7 @@ input[type="search" i]::-webkit-search-cancel-button {
 }
 
 .filter__title {
+  margin: 0;
   margin-bottom: 11px;
   font-size: 1rem;
   font-weight: 600;
@@ -685,6 +687,7 @@ input[type="search" i]::-webkit-search-cancel-button {
   background-color: transparent;
   border: 1px solid var(--light-color);
   border-radius: 6px;
+  transition: background-color 0.5s ease;
 }
 
 @media (hover:hover) {
@@ -714,6 +717,7 @@ input[type="search" i]::-webkit-search-cancel-button {
 
 .is-focused .choices__inner {
   background-color: rgba(255, 255, 255, 0.2);
+  transition: background-color 0.5s ease;
 }
 
 .is-open .choices__inner::after {
@@ -743,6 +747,7 @@ input[type="search" i]::-webkit-search-cancel-button {
 
 .choices__list[aria-expanded] .choices__item--selectable.is-highlighted {
   background-color: rgba(255, 255, 255, 0.2);
+  transition: background-color 0.5s ease;
 }
 
 .choices__list--dropdown .choices__item:not(:last-child) {
@@ -763,6 +768,7 @@ input[type="search" i]::-webkit-search-cancel-button {
   position: relative;
   font-size: 1rem;
   line-height: 2rem;
+  cursor: pointer;
 }
 
 .filter__default {
@@ -777,6 +783,7 @@ input[type="search" i]::-webkit-search-cancel-button {
   width: 12px;
   height: 12px;
   border: 1px solid var(--light-color);
+  transition: border-color 0.5s ease;
 }
 
 .point {
@@ -789,6 +796,11 @@ input[type="search" i]::-webkit-search-cancel-button {
   border-radius: 50%;
   background-color: var(--effects-color-light);
   opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.filter__text {
+  transition: color 0.5s ease;
 }
 
 .filter__default:checked+.filter__custom,
@@ -839,6 +851,9 @@ input[type="search" i]::-webkit-search-cancel-button {
   border-radius: 50%;
   background-color: #666;
   cursor: pointer;
+  transition-property: outline, background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
 
 .galery-swiper__next svg,
@@ -890,6 +905,7 @@ input[type="search" i]::-webkit-search-cancel-button {
   outline-offset: -3px;
   outline: 3px solid transparent;
   -webkit-tap-highlight-color: transparent;
+  transition: outline 0.5s ease;
 }
 
 .galery-swiper__content::after {
@@ -907,7 +923,7 @@ input[type="search" i]::-webkit-search-cancel-button {
   background-position: center center;
   background-size: 81px 79px;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.5s ease;
 }
 
 .galery-swiper__content::before {
@@ -917,25 +933,22 @@ input[type="search" i]::-webkit-search-cancel-button {
   content: '';
   background: linear-gradient(0deg, rgba(194, 131, 243, 0.4), rgba(194, 131, 243, 0.4));
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.5s ease;
 }
 
 .galery-swiper__content:focus-visible {
   outline: 3px solid var(--effects-color-dark);
-  transition: outline 0.3s ease, outline-offset 0.1s ease;
 }
 
 @media (hover: hover) {
   .galery-swiper__content:hover:not(:focus-visible):not(:active)::after {
     opacity: 1;
-    transition: opacity 0.3s ease;
   }
 }
 
 .galery-swiper__content:active::after,
 .galery-swiper__content:active::before {
   opacity: 1;
-  transition: opacity 0.4s ease;
 }
 
 .galery-swiper__paint {
@@ -965,6 +978,10 @@ input[type="search" i]::-webkit-search-cancel-button {
   margin-top: -1px;
 }
 
+.acc__header {
+  margin: 0;
+}
+
 .acc__btn {
   position: relative;
   width: 100%;
@@ -977,6 +994,15 @@ input[type="search" i]::-webkit-search-cancel-button {
   line-height: 2rem;
   border-top: 1px solid #cacaca;
   border-bottom: 1px solid #cacaca;
+  transition-property: border-color, z-index;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
+}
+
+.acc__title {
+  transition-property: background-color, color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
 
 .acc__icon {
@@ -987,6 +1013,7 @@ input[type="search" i]::-webkit-search-cancel-button {
   height: 30px;
   border-radius: 50%;
   background-color: #ececec;
+  transition: background-color 0.5s ease, border 0.5s ease;
 }
 
 .acc__icon svg {
@@ -996,7 +1023,7 @@ input[type="search" i]::-webkit-search-cancel-button {
   width: 12px;
   height: 7px;
   transform: translate(-50%, -50%);
-  transition: transform 0.4s ease;
+  transition: transform 0.3s ease;
 }
 
 .acc__icon path {
@@ -1010,21 +1037,20 @@ input[type="search" i]::-webkit-search-cancel-button {
 .acc__btn:focus-visible>.acc__title {
   background-color: var(--effects-color-medium);
   color: var(--light-color);
-  transition-property: background-color, color;
-  transition-duration: 0.3s;
-  transition-timing-function: ease-in-out;
 }
 
 .acc__btn:focus-visible>.acc__icon {
   background-color: var(--effects-color-x-light);
-  transition: background-color 0.3s ease-in-out;
 }
 
 @media (hover:hover) {
   .acc__btn:hover:not(:focus-visible):not(:active) {
     border-color: var(--effects-color-medium);
-    color: var(--effects-color-medium);
     z-index: 1;
+  }
+
+  .acc__btn:hover:not(:focus-visible):not(:active)>.acc__title {
+    color: var(--effects-color-medium);
   }
 
   .acc__btn:hover:not(:focus-visible):not(:active)>.acc__icon {
@@ -1049,7 +1075,7 @@ input[type="search" i]::-webkit-search-cancel-button {
 .acc__item.is-active .acc__icon svg {
   top: 50%;
   transform: translate(-50%, -50%) rotate(-180deg);
-  transition: transform 0.3s ease;
+  transition: transform 0.5s ease;
 }
 
 .acc__item.is-active .acc__btn,
@@ -1057,14 +1083,14 @@ input[type="search" i]::-webkit-search-cancel-button {
   z-index: 1;
   color: var(--effects-color-dark);
   border-color: var(--effects-color-dark);
-  transition: border-color 0.3s ease-in-out;
+  /* transition: border-color 0.3s ease-in-out; */
 }
 
 .acc__item.is-active .acc__icon,
 .acc__btn:active>.acc__icon {
   background-color: var(--effects-color-x-light);
   border: 1px solid var(--effects-color-medium);
-  transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out
+  /* transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out; */
 }
 
 /* acc-panel content */
@@ -1076,6 +1102,13 @@ input[type="search" i]::-webkit-search-cancel-button {
 .artists__link {
   position: relative;
   cursor: pointer;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
+}
+
+.artists__link--selected {
+  color: var(--effects-color-dark);
 }
 
 .artists__link:focus-visible {
@@ -1130,6 +1163,9 @@ input[type="search" i]::-webkit-search-cancel-button {
   position: relative;
   font-weight: 600;
   color: var(--effects-color-medium);
+  transition-property: color, background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
 
 /* info sample */
@@ -1169,7 +1205,7 @@ input[type="search" i]::-webkit-search-cancel-button {
   height: 1px;
   background-color: var(--effects-color-medium);
   transform: scale(0);
-  transition: transform 0.4s ease-in-out;
+  transition: transform 0.5s ease-in-out;
 }
 
 .catalogue-sample__link:focus-visible,
@@ -1186,7 +1222,6 @@ input[type="search" i]::-webkit-search-cancel-button {
   .artists__link:hover:not(:focus-visible)::after {
     transform: scale(1);
     transform-origin: center center;
-    transition: transform 0.4s ease-in-out;
   }
 }
 
@@ -1196,6 +1231,7 @@ input[type="search" i]::-webkit-search-cancel-button {
 }
 
 .painter__name {
+  margin: 0;
   margin-bottom: 5px;
   font-weight: 600;
   font-size: 1.5rem;
@@ -1284,6 +1320,7 @@ input[type="search" i]::-webkit-search-cancel-button {
 }
 
 .card__title {
+  margin: 0;
   margin-bottom: 5px;
   font-weight: 600;
   font-size: 1.5rem;
@@ -1305,6 +1342,9 @@ input[type="search" i]::-webkit-search-cancel-button {
   line-height: 2rem;
   padding: 0 8px 3px;
   color: var(--effects-color-medium);
+  transition-property: color, background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
 
 .card__link::after {
@@ -1316,6 +1356,7 @@ input[type="search" i]::-webkit-search-cancel-button {
   height: 1px;
   transform: translateX(-50%);
   background-color: var(--effects-color-medium);
+  transform: background-color 0.5s ease;
 }
 
 .card__link:focus-visible {
@@ -1381,24 +1422,18 @@ input[type="search" i]::-webkit-search-cancel-button {
   transform: translate(-50%, -50%);
   font-size: 13px;
   font-weight: 700;
-  line-height: 1.1em;
   color: #000;
 }
 
-.tooltip-popup {
-  position: absolute;
-  z-index: 10;
-  padding: 7px 10px;
-  width: 240px;
-  text-align: center;
-  font-weight: 600;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  color: var(--light-color);
+.tooltip.shown {
   background-color: var(--effects-color-medium);
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.tooltip.shown::after {
+  content: '\00d7';
+  color: var(--light-color);
+  font-weight: 600;
+  font-size: 13px;
 }
 
 .tooltip:focus-visible {
@@ -1406,19 +1441,36 @@ input[type="search" i]::-webkit-search-cancel-button {
 }
 
 .tooltip:focus-visible,
-.tooltip:hover:not(:focus-visible) {
+.tooltip:hover:not(:focus-visible):not(.shown) {
   background-color: var(--effects-color-x-light);
-}
-
-.tooltip:focus-visible+.tooltip-popup,
-.tooltip:hover:not(:focus-visible)+.tooltip-popup {
-  visibility: visible;
-  opacity: 1;
-  transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .tooltip:active::after {
   color: var(--light-color);
+  background-color: var(--effects-color-medium);
+}
+
+.tooltip-popup {
+  display: none;
+}
+
+.tippy-box[data-theme~='purple'] {
+  background-color: var(--effects-color-medium);
+  color: var(--light-color);
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.tippy-content {
+  padding: 8px 11px;
+  max-width: 264px;
+}
+
+.tippy-arrow {
+  color: var(--effects-color-medium);
+  display: none;
 }
 
 .projects__link {
@@ -1426,6 +1478,7 @@ input[type="search" i]::-webkit-search-cancel-button {
   padding: 0 3px;
   margin-left: -3px;
   color: var(--effects-color-medium);
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .projects__link::after {
@@ -1438,20 +1491,19 @@ input[type="search" i]::-webkit-search-cancel-button {
   transform: translateX(-50%) scale(0);
   transform-origin: center;
   background-color: var(--effects-color-medium);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.5s ease, background-color 0.5s ease;
 }
 
 .projects__link:focus-visible {
   outline: none;
   background-color: var(--effects-color-medium);
   color: var(--light-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+
 }
 
 @media (hover:hover) {
   .projects__link:hover:not(:focus-visible):not(:active)::after {
     transform: translateX(-50%) scale(1);
-    transition: transform 0.3s ease-in-out;
   }
 }
 
@@ -1463,10 +1515,10 @@ input[type="search" i]::-webkit-search-cancel-button {
 .projects__link:active::after {
   background-color: var(--effects-color-dark);
   transform: translateX(-50%) scale(1);
-  transition: transform 0.3s ease-in-out;
 }
 
 .partners__subtitle {
+  margin: 0;
   margin-bottom: 11px;
   font-size: 1.125rem;
   line-height: 2rem;
@@ -1482,16 +1534,19 @@ input[type="search" i]::-webkit-search-cancel-button {
   position: initial;
 }
 
-.partners__img {
+.partners__link {
   position: relative;
   z-index: 1;
   margin: 0 auto;
   display: block;
   outline: 1px solid #cacaca;
   outline-offset: -1px;
+  transition-property: outline;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
 
-.partners__img img {
+.partners__link img {
   position: relative;
   z-index: -1;
   display: block;
@@ -1500,16 +1555,16 @@ input[type="search" i]::-webkit-search-cancel-button {
   border: none;
   -webkit-filter: grayscale(100%) opacity(0.3);
   filter: grayscale(100%) opacity(0.3);
-
+  transition: filter 0.5s ease;
 }
 
-.partners__img:focus-visible,
-.partners__img:active {
+.partners__link:focus-visible,
+.partners__link:active {
   outline: 1px solid var(--effects-color-medium);
 }
 
-.partners__img:hover:not(:focus-visible) img,
-.partners__img:active img {
+.partners__link:hover:not(:focus-visible) img,
+.partners__link:active img {
   -webkit-filter: grayscale(0) opacity(1);
   filter: grayscale(0) opacity(1);
 }
@@ -1526,6 +1581,9 @@ input[type="search" i]::-webkit-search-cancel-button {
   background-color: #ececec;
   cursor: pointer;
   border: 2px solid #ececec;
+  transition-property: border-color, background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
 
 .partners__controls svg {
@@ -1550,14 +1608,12 @@ input[type="search" i]::-webkit-search-cancel-button {
 .partners__controls:focus-visible {
   outline: none;
   border-color: var(--effects-color-medium);
-  transition: border-color 0.2s ease;
 }
 
 @media (hover:hover) {
   .partners__controls:hover:not(:focus-visible):not(:active):not(.partners__controls.swiper-button-disabled) {
     background-color: var(--effects-color-x-light);
     border-color: var(--effects-color-x-light);
-    transition: background-color 0.2s ease, border-color 0.2s ease;
 
   }
 }
@@ -1565,7 +1621,6 @@ input[type="search" i]::-webkit-search-cancel-button {
 .partners__controls:active {
   background-color: var(--effects-color-x-light);
   border-color: var(--effects-color-medium);
-  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 /* CONTACTS */
@@ -1577,6 +1632,7 @@ input[type="search" i]::-webkit-search-cancel-button {
 }
 
 .contacts__subtitle {
+  margin: 0;
   margin-bottom: 3px;
   font-weight: 600;
   font-size: 1.125rem;
@@ -1604,6 +1660,7 @@ input[type="search" i]::-webkit-search-cancel-button {
   font-size: 1rem;
   line-height: 2rem;
   color: var(--text-color);
+  transition: background-color 0.5s ease;
 }
 
 .contacts__input.just-validate-error-field {
@@ -1624,7 +1681,7 @@ input[type="search" i]::-webkit-search-cancel-button {
 .contacts__input:hover:not(:focus-visible) {
   outline: none;
   background-color: #ececec;
-  transition: background-color 0.2s ease;
+
 }
 
 .contacts__submit {
@@ -1639,6 +1696,9 @@ input[type="search" i]::-webkit-search-cancel-button {
   border-radius: 100px;
   outline: 2px solid transparent;
   outline-offset: 3px;
+  transition-property: outline, background-color, color, border-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
 
 .contacts__submit span {
@@ -1647,14 +1707,12 @@ input[type="search" i]::-webkit-search-cancel-button {
 
 .contacts__submit:focus-visible {
   outline: 2px solid var(--effects-color-light);
-  transition: outline 0.2s ease;
 }
 
 @media (hover:hover) {
   .contacts__submit:hover:not(:focus-visible):not(:active):not(:disabled) {
     background-color: var(--effects-color-medium);
     color: var(--light-color);
-    transition: color 0.2s ease, background-color 0.2s ease;
   }
 }
 
@@ -1662,9 +1720,6 @@ input[type="search" i]::-webkit-search-cancel-button {
   background-color: var(--effects-color-dark);
   border-color: var(--effects-color-x-light);
   color: var(--light-color);
-  transition-property: background-color, border-color, color;
-  transition-duration: 0.2s;
-  transition-timing-function: ease;
 }
 
 .contacts__submit::after {
@@ -1677,35 +1732,53 @@ input[type="search" i]::-webkit-search-cancel-button {
   background-image: url(../img/loading.svg);
   background-repeat: no-repeat;
   -webkit-animation-name: loading;
-          animation-name: loading;
+  animation-name: loading;
   -webkit-animation-duration: 3s;
-          animation-duration: 3s;
+  animation-duration: 3s;
   -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
   -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
+  animation-fill-mode: both;
   -webkit-animation-timing-function: linear;
-          animation-timing-function: linear;
+  animation-timing-function: linear;
   transform-origin: center;
   opacity: 0;
   visibility: hidden;
+  transition: opacity 0.4s ease, visibiliti 0.3s ease;
 }
 
 @-webkit-keyframes loading {
-  0% {transform: scale(1)}
-  50% {transform: scale(0.5)}
-  100% {transform: scale(1)}
+  0% {
+    transform: scale(1)
+  }
+
+  50% {
+    transform: scale(0.5)
+  }
+
+  100% {
+    transform: scale(1)
+  }
 }
 
 @keyframes loading {
-  0% {transform: scale(1)}
-  50% {transform: scale(0.5)}
-  100% {transform: scale(1)}
+  0% {
+    transform: scale(1)
+  }
+
+  50% {
+    transform: scale(0.5)
+  }
+
+  100% {
+    transform: scale(1)
+  }
 }
 
 .contacts__submit.sending::after {
   opacity: 1;
   visibility: visible;
+  transition: opacity 0.4s ease, visibiliti 0.3s ease;
 }
 
 .contacts__submit:disabled {
@@ -1719,6 +1792,7 @@ input[type="search" i]::-webkit-search-cancel-button {
 }
 
 .socials__subtitle {
+  margin: 0;
   margin-bottom: 7px;
   font-weight: 400;
   font-size: 1.125rem;
@@ -1737,6 +1811,7 @@ input[type="search" i]::-webkit-search-cancel-button {
   display: inline-block;
   width: 50px;
   height: 50px;
+  transition: filter 0.5s ease, outline 0.3s ease;
 }
 
 .socials__link img {
@@ -1750,24 +1825,17 @@ input[type="search" i]::-webkit-search-cancel-button {
   outline: none;
   -webkit-filter: opacity(0.5);
   filter: opacity(0.5);
-  transition: -webkit-filter 0.2s ease;
-  transition: filter 0.2s ease;
-  transition: filter 0.2s ease, -webkit-filter 0.2s ease;
 }
 
 @media (hover:hover) {
   .socials__link:hover:not(:active) {
     -webkit-filter: opacity(0.5);
     filter: opacity(0.5);
-    transition: -webkit-filter 0.2s ease;
-    transition: filter 0.2s ease;
-    transition: filter 0.2s ease, -webkit-filter 0.2s ease;
   }
 }
 
 .socials__link:active img {
   outline: 2px solid var(--effects-color-medium);
-  transition: outline 0.2s ease;
 }
 
 /* MAP */
@@ -1821,6 +1889,10 @@ input[type="search" i]::-webkit-search-cancel-button {
   height: 50px;
 }
 
+.footer__link path {
+  transition: fill 0.5s ease;
+}
+
 .vk {
   margin-right: 16px;
 }
@@ -1832,20 +1904,16 @@ input[type="search" i]::-webkit-search-cancel-button {
 
 .footer__link:focus-visible path {
   fill: var(--light-color);
-  transition: fill 0.2s ease;
 }
 
 @media (hover:hover) {
   .footer__link:hover:not(:focus-visible):not(:active) path {
     fill: var(--light-color);
-    transition: fill 0.2s ease;
-
   }
 }
 
 .footer__link:active path {
   fill: var(--effects-color-medium);
-  transition: fill 0.2s ease;
 
 }
 
@@ -1889,7 +1957,7 @@ input[type="search" i]::-webkit-search-cancel-button {
   max-height: 35%;
   width: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   background-color: var(--light-color);
 }
 
@@ -1924,12 +1992,14 @@ input[type="search" i]::-webkit-search-cancel-button {
 }
 
 .modal__title {
+  margin: 0;
   font-weight: 600;
   font-size: 1.5rem;
   line-height: 2rem;
 }
 
 .modal__subtitle {
+  margin: 0;
   margin-bottom: 2px;
   font-weight: 600;
   font-size: 1rem;
@@ -1951,6 +2021,7 @@ input[type="search" i]::-webkit-search-cancel-button {
   width: 33px;
   height: 33px;
   font-size: 20px;
+  transition: color 0.3s ease;
 }
 
 .modal__close::after {
@@ -1982,6 +2053,7 @@ input[type="search" i]::-webkit-search-cancel-button {
 }
 
 .modal__text {
+  margin: 0;
   font-size: 1rem;
   line-height: 1.375rem;
 }

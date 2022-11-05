@@ -57,11 +57,12 @@ function createSubMenu(artArr, linksObj) {
     let listItem = createHtml({
       tagName: 'li',
       classes: ['submenu__item'],
-      attributes: {'data-mark': `${i}`,}
+      // attributes: {'data-mark': `${i}`,}
     })
     let button = createHtml({
       tagName: 'button',
       classes: ['btn-reset', 'submenu__btn'],
+      attributes: {'data-mark': `${i}`,},
       text: `${artArr[i]}`,
     })
     let dropdowWrap = createHtml({
@@ -104,14 +105,14 @@ function createSubMenu(artArr, linksObj) {
 
 }
 
-function renderSubMenu(isDeskSize, targetEl, form) {
+function renderSubMenu(isDeskSize, targetEl, searchWrapper) {
   let container = createSubMenu(artDirBtns, submenuLinks);
   if(isDeskSize) {
     targetEl.append(container);
-    container.append(form);
+    container.append(searchWrapper);
   } else {
     let submenu = document.querySelector('.submenu-container');
-    document.querySelector('.menu-container').append(form);
+    document.querySelector('.menu-container').append(searchWrapper);
     if(submenu) submenu.remove();
 
   }
@@ -119,11 +120,12 @@ function renderSubMenu(isDeskSize, targetEl, form) {
 
 function showOnDesck() {
   let deskMedia = window.matchMedia('(min-width: 1025px)');
-  let search = document.querySelector('.search');
+  let searchWrapper = document.querySelector('.search-wrapper')
+  // let search = document.querySelector('.search');
   let header = document.querySelector('.header');
-  renderSubMenu(deskMedia.matches, header, search);
+  renderSubMenu(deskMedia.matches, header, searchWrapper);
   deskMedia.addEventListener('change', function(e) {
-    renderSubMenu(e.matches, header, search);
+    renderSubMenu(e.matches, header, searchWrapper);
   })
 }
 

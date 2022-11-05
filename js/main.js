@@ -4,8 +4,8 @@ function handlerHeaderElClick(e) {
   const menu = document.querySelector('.menu');
   const searchForm = document.querySelector('.header__search');
   const dropdowns = document.querySelectorAll('.submenu__dropdown');
-  const submenuItems = document.querySelectorAll('.submenu__item')
   const subMenuBtns = document.querySelectorAll('.submenu__btn');
+  const openSearchBtn = document.querySelector('.open-search');
 
   if (e.target.closest('.burger')) {
     burger.classList.toggle('burger--active');
@@ -21,24 +21,25 @@ function handlerHeaderElClick(e) {
 
   if (e.target.closest('.open-search')) {
     searchForm.classList.add('header__search--open');
+    openSearchBtn.setAttribute('aria-expanded', 'true');
   }
 
   if (e.target.closest('.search__close')) {
-    searchForm.classList.remove('header__search--open')
+    searchForm.classList.remove('header__search--open');
+    openSearchBtn.setAttribute('aria-expanded', 'false');
+    openSearchBtn.focus();
   }
 
-  const targetBtn = e.target.closest('.submenu__item');
+  const targetBtn = e.target.closest('.submenu__btn');
   if (targetBtn) {
-    openDropdown(targetBtn, dropdowns, subMenuBtns, submenuItems)
+    openDropdown(targetBtn, dropdowns, subMenuBtns)
   }
-
 
   if (!e.target.closest('.header__submenu')) {
-    const activeItem = document.querySelector('.submenu__item.is-active');
-    if (activeItem) {
-      const activeBtn = activeItem.firstElementChild;
-      const openedDropdown = activeItem.lastElementChild;
-      activeItem.classList.remove('is-active');
+    const activeBtn = document.querySelector('.submenu__btn.is-active');
+    if (activeBtn) {
+      const openedDropdown = activeBtn.nextElementSibling;
+      activeBtn.classList.remove('is-active');
       resetDropAria(activeBtn);
       openedDropdown.classList.remove('is-open');
     }
@@ -46,22 +47,19 @@ function handlerHeaderElClick(e) {
   }
 }
 // submenu functions
-function openDropdown(targetEl, dropLists, ctrlBtns, items) {
+function openDropdown(targetEl, dropLists, ctrlBtns) {
   let mark = targetEl.dataset.mark;
   let dropdown = document.querySelector(`[data-path="${mark}"]`)
   dropdown.classList.toggle('is-open');
   targetEl.classList.toggle('is-active');
-  setDropAria(targetEl.firstElementChild);
+  setDropAria(targetEl);
   for (let el of dropLists) {
     if (el.dataset.path === mark) continue;
     el.classList.remove('is-open');
   }
   for (let el of ctrlBtns) {
-    if (el == targetEl.firstElementChild) continue;
-    resetDropAria(el);
-  }
-  for (let el of items) {
     if (el == targetEl) continue;
+    resetDropAria(el);
     el.classList.remove('is-active')
   }
 }
@@ -77,38 +75,6 @@ function resetDropAria(el) {
   el.setAttribute('aria-label', 'Открыть подменю')
 }
 
-// tooltip functions
-function placeTooltip(anchor, block) {
-  const popup = document.querySelector(`[id="${anchor.dataset.tool}"`);
-  let anchorCoords = anchor.getBoundingClientRect();
-  let blockCoords = block.getBoundingClientRect();
-  let popupPos = {
-    left: anchorCoords.left + window.scrollX - (popup.offsetWidth - anchor.offsetWidth) / 2,
-    top: anchorCoords.top + window.scrollY - popup.offsetHeight - 12,
-    right: anchorCoords.right + window.scrollX + (popup.offsetWidth - anchor.offsetWidth) / 2,
-    bottom: anchorCoords.bottom + window.scrollY + 12
-  }
-
-  if (popupPos.right > blockCoords.right) {
-    popupPos.left = blockCoords.right - popup.offsetWidth;
-  }
-
-  if (popupPos.left < blockCoords.left) {
-    popupPos.left = blockCoords.left
-  }
-
-  popup.style.left = popupPos.left + 'px';
-  popup.style.top = popupPos.top + 'px';
-}
-
-function showTooltip(anchor, block) {
-  window.addEventListener('load', function (e) {
-    placeTooltip(anchor, block);
-  })
-  window.addEventListener('resize', function (e) {
-    placeTooltip(anchor, block);
-  })
-}
 
 // set tabindex for sliders
   // for slides with interactive firstchild
@@ -229,15 +195,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
       }
     });
   }
-
-   // tooltip
-   {
-    let anchors = document.querySelectorAll('.tooltip');
-    let block = document.querySelector('.projects__text');
-    anchors.forEach(anchor => {
-      showTooltip(anchor, block);
-    })
-  }
   // partners-slider
   {
     let partnersSlider = new Swiper('.partners__swiper', {
@@ -293,6 +250,25 @@ document.addEventListener('DOMContentLoaded', function (e) {
     duration: 400,
   });
 
+  // tooltips
+  tippy('.tooltip', {
+    content(reference) {
+      let id = reference.getAttribute('data-tool');
+      let tool = document.getElementById(id);
+      return tool.innerHTML;
+
+    },
+    allowHTML: true,
+    trigger: 'click focus',
+    theme: 'purple',
+    onShow(tippyObj) {
+      tippyObj.reference.classList.add('shown')
+    },
+    onHide(tippyObj) {
+      tippyObj.reference.classList.remove('shown');
+    }
+  })
+
   // map
   ymaps.ready(init);
   function init() {
@@ -331,5 +307,4 @@ document.addEventListener('DOMContentLoaded', function (e) {
     myMap.controls.remove('rulerControl');
     myMap.behaviors.disable('scrollZoom');
   }
-
 })
