@@ -260,6 +260,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
     },
     allowHTML: true,
     trigger: 'click focus',
+    duration: [1000, 500],
     theme: 'purple',
     onShow(tippyObj) {
       tippyObj.reference.classList.add('shown')
